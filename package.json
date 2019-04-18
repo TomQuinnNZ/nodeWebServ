@@ -1,0 +1,22 @@
+{
+  "name": "node-web-server-test",
+  "version": "1.0.0",
+  "description": "NodeJS Web Server (Testing)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TomQuinnNZ/nodeWebServ.git"
+  },
+  "author": "Tom Quinn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TomQuinnNZ/nodeWebServ/issues"
+  },
+  "homepage": "https://github.com/TomQuinnNZ/nodeWebServ#readme",
+  "dependencies": {
+    "moment": "^2.24.0"
+  }
+}
