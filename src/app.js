@@ -1,54 +1,16 @@
-const http = require('http');
-const fs = require('fs');
+var express = require('express');
+var app = express();
 
-http.createServer(function(request, response) {
+var port = process.env.PORT || 3000;
 
-    if (request.url === '/') {
-        response.writeHead(200, { 'Content-Type': 'text/html'});
-        // Convert file contents to UTF8 (string) so we can use string substitution in the callback
-        fs.readFile(__dirname + '/index.htm', 'utf8', (err, data) => { 
-            if (err) {
-                response.end(err);
-            }
-            else {
-                const message = 'Hello world (placeholder via template)!';
-                const html = data.replace('{Message}', message);
-                response.end(html);
-            }
-        });
-    }
-    else if (request.url === '/api') {
-        response.writeHead(200, { 'Content-Type': 'application/json' });
-        const obj = {
-            firstname: 'John',
-            lastname: 'Doe'
-        };
-        response.end(JSON.stringify(obj));
-    }
-    else {
-        response.writeHead(200, { 'Content-Type': 'text/plain' });
-        response.end('Default endpoint if not an API or JSON call.');
-    }
+app.get('/', (request, response) => {
+    response.send('<html><head></head><body><h1>Hello world (Express)!</h1></body></html>');
+});
 
-}).listen(1337, '127.0.0.1');
+app.get('/api', (request, response) => {
+    response.json({ firstname: 'John', lastname: 'Doe' });
+});
+
+app.listen(port);
 
 
-/* http.createServer(function(request, response) {
-    response.writeHead(200, { 'Content-Type': 'text/html'});
-    // Convert file contents to UTF8 (string) so we can use string substitution in the callback
-    
-    var html = fs.createReadStream(__dirname + '/index.htm');
-    html.pipe(response);
-
-
-    // fs.readFile(__dirname + '/index.htm', 'utf8', (err, data) => {
-    //     if (err) {
-    //         response.end(err);
-    //     }
-    //     else {
-    //         const message = 'Hello world (placeholder via template)!';
-    //         const html = data.replace('{Message}', message);
-    //         response.end(html);
-    //     }
-    // });
-}).listen(1337, '127.0.0.1'); */
