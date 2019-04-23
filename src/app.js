@@ -5,7 +5,11 @@ var app = express();
 
 var port = process.env.PORT || 3000;
 
+// parse request body so that arguments can be read. Returns a function!
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+// same thing, into json instead
+var jsonParser = bodyParser.json();
 
 //static files now pulled from /public directory via middleware function
 var staticfilepath = path.join(__dirname, '../public');
@@ -30,8 +34,15 @@ app.get('/person/:id', (request, response) => {
     response.render('person', { id: request.params.id, querystring: request.query.querystring })
 });
 
+//urlencodedParser is run first as a callback, then the explicit function runs afterwards
 app.post('/person', urlencodedParser, (request, response) => {
     response.send('Thank you (post submitted)!');
+    console.log(request.body.firstname);
+    console.log(request.body.lastname);
+});
+
+app.post('/personjson', jsonParser, (request, response) => {
+    response.send('JSON data received.');
     console.log(request.body.firstname);
     console.log(request.body.lastname);
 });
