@@ -12,7 +12,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var jsonParser = bodyParser.json();
 
 //static files now pulled from /public directory via middleware function
-var staticfilepath = path.join(__dirname, '../public');
+var staticfilepath = path.join(__dirname, '/public');
 app.use('/assets', express.static(staticfilepath));
 
 app.use('/', function(request, response, next) {
@@ -20,7 +20,7 @@ app.use('/', function(request, response, next) {
     next();
 });
 
-var viewslocation = path.join(__dirname, '../views');
+var viewslocation = path.join(__dirname, '/views');
 app.set('view engine', 'ejs');
 app.set('views', viewslocation);
 
