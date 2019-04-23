@@ -13,14 +13,18 @@ app.use('/', function(request, response, next) {
     next();
 });
 
+var viewslocation = path.join(__dirname, '../views');
+app.set('view engine', 'ejs');
+app.set('views', viewslocation);
+
 app.get('/', (request, response) => {
-    response.send('<html><head><link href=assets/style.css type=text/css rel=stylesheet /></head><body><h1>Hello world (Express)!</h1></body></html>');
+    response.render('index');
 });
 
 // colon before the id tells express that 'id' could be anything
 app.get('/person/:id', (request, response) => {
     // 'id' can then be accessed from request.params
-    response.send(`<html><head></head><body><h1>Person ID: ${request.params.id}</h1></body></html>`);
+    response.render('person', { id: request.params.id })
 });
 
 app.listen(port);
