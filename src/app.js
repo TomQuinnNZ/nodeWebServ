@@ -24,7 +24,7 @@ app.get('/', (request, response) => {
 // colon before the id tells express that 'id' could be anything
 app.get('/person/:id', (request, response) => {
     // 'id' can then be accessed from request.params
-    response.render('person', { id: request.params.id })
+    response.render('person', { id: request.params.id, querystring: request.query.querystring })
 });
 
 app.listen(port);
