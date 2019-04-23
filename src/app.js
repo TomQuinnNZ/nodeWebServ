@@ -1,9 +1,11 @@
 var path = require('path');
-var bodyParse = require('body-parser');
+var bodyParser = require('body-parser');
 var express = require('express');
 var app = express();
 
 var port = process.env.PORT || 3000;
+
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 //static files now pulled from /public directory via middleware function
 var staticfilepath = path.join(__dirname, '../public');
@@ -26,6 +28,12 @@ app.get('/', (request, response) => {
 app.get('/person/:id', (request, response) => {
     // 'id' can then be accessed from request.params
     response.render('person', { id: request.params.id, querystring: request.query.querystring })
+});
+
+app.post('/person', urlencodedParser, (request, response) => {
+    response.send('Thank you (post submitted)!');
+    console.log(request.body.firstname);
+    console.log(request.body.lastname);
 });
 
 app.listen(port);
