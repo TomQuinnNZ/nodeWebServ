@@ -1,5 +1,5 @@
 var path = require('path');
-var viewslocation = path.join(__dirname, '/views');
+var viewslocation = path.join(__dirname, '../views');
 var bodyParser = require('body-parser');
 
 module.exports = (app) => {
